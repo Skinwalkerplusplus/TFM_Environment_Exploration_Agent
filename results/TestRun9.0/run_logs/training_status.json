@@ -1,0 +1,29 @@
+{
+    "ppo_behavior": {
+        "checkpoints": [
+            {
+                "steps": 34688,
+                "file_path": "results\\TestRun9.0\\ppo_behavior\\ppo_behavior-34688.onnx",
+                "reward": null,
+                "creation_time": 1749548780.4229043,
+                "auxillary_file_paths": [
+                    "results\\TestRun9.0\\ppo_behavior\\ppo_behavior-34688.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 34688,
+            "file_path": "results\\TestRun9.0\\ppo_behavior.onnx",
+            "reward": null,
+            "creation_time": 1749548780.4229043,
+            "auxillary_file_paths": [
+                "results\\TestRun9.0\\ppo_behavior\\ppo_behavior-34688.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.7.1+cpu"
+    }
+}

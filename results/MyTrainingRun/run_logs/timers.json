@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1749394542",
+        "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\zirol\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\mlagents-learn Config/ppo_agent.yaml --run-id=MyTrainingRun",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.7.1+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1749394550"
+    },
+    "total": 8.848681800000122,
+    "count": 1,
+    "self": 0.007660600000235718,
+    "children": {
+        "run_training.setup": {
+            "total": 0.5694354999995994,
+            "count": 1,
+            "self": 0.5694354999995994
+        },
+        "TrainerController.start_learning": {
+            "total": 8.271585700000287,
+            "count": 1,
+            "self": 8.720000005268957e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 8.27148710000074,
+                    "count": 1,
+                    "self": 8.27148710000074
+                },
+                "TrainerController._save_models": {
+                    "total": 1.1399999493733048e-05,
+                    "count": 1,
+                    "self": 1.1399999493733048e-05
+                }
+            }
+        }
+    }
+}
