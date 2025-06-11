@@ -6,6 +6,7 @@ public class grid_score_detection : MonoBehaviour
 {
     public int gridSize = 10;
     public Material visitedMaterial;
+    public Material nonVisitedMaterial;
 
     public bool[,] visitedCells;
     private GameObject[,] gridVisuals;
@@ -13,7 +14,7 @@ public class grid_score_detection : MonoBehaviour
 
     public float yOffset = 0.01f;
 
-    public GameObject agent;
+    public Transform agent;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,11 @@ public class grid_score_detection : MonoBehaviour
         CreateGrid();
     }
 
+    void FixedUpdate()
+    {
+        MarkWalked(agent.position);
+    }
+
     void CreateGrid()
     {
         for (int x =0; x < gridSize; x++)
@@ -30,10 +36,11 @@ public class grid_score_detection : MonoBehaviour
             for (int z = 0; z < gridSize; z++)
             {
                 GameObject cell = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                cell.transform.position = new Vector3(x * cellSize - gridSize / 2f, 0.01f, z * cellSize - gridSize / 2f);
+                cell.transform.position = new Vector3(x * cellSize - gridSize / 2f, yOffset, z * cellSize - gridSize / 2f);
                 cell.transform.rotation = Quaternion.Euler(90, 0, 0);
                 cell.transform.parent = transform;
                 gridVisuals[x, z] = cell;
+                gridVisuals[x, z].GetComponent<Renderer>().material = nonVisitedMaterial;
             }
         }
     }

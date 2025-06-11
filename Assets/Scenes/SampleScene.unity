@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 901870372}
   - component: {fileID: 901870371}
   - component: {fileID: 901870370}
+  - component: {fileID: 901870374}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -531,6 +532,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &901870374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901870369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3ec89e0f469f845bed86401bc8bcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 70
+  visitedMaterial: {fileID: 2100000, guid: 39b369d109d9ce9448bf2fe656260d9a, type: 2}
+  nonVisitedMaterial: {fileID: 2100000, guid: 41c6c2904c79f7643acb193e301f77c7, type: 2}
+  yOffset: 3
+  agent: {fileID: 1501855407}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +800,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 500000
+  gridScore: {fileID: 901870374}
 --- !u!114 &1501855402
 MonoBehaviour:
   m_ObjectHideFlags: 0

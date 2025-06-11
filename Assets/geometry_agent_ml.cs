@@ -13,6 +13,8 @@ public class GeometryBugFinder : Agent
 
     private HashSet<Vector3> visitedPositions = new HashSet<Vector3>();
 
+    public grid_score_detection gridScore;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
