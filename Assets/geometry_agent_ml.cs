@@ -15,6 +15,10 @@ public class GeometryBugFinder : Agent
 
     public grid_score_detection gridScore;
 
+    public Transform startPos;
+
+    private float punishmentMultiplier = 1f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,8 +36,8 @@ public class GeometryBugFinder : Agent
         float moveX = actions.ContinuousActions[0];
         float moveZ = actions.ContinuousActions[1];
 
-        float axisBiasPenalty = Mathf.Abs(moveX - moveZ) * -0.01f;
-        AddReward(axisBiasPenalty);
+        //float axisBiasPenalty = Mathf.Abs(moveX - moveZ) * -0.01f;
+        //AddReward(axisBiasPenalty);
 
         Vector3 movement = new Vector3(moveX, 0, moveZ) * 5f;
         rb.AddForce(movement, ForceMode.VelocityChange);
@@ -41,9 +45,39 @@ public class GeometryBugFinder : Agent
         //float distanceToTarget = Vector3.Distance(transform.position, agentTarget.position);
         //AddReward(-distanceToTarget * 0.01f);
 
-        if (visitedPositions.Add(transform.position))
+        //if (visitedPositions.Add(transform.position))
+        //{
+        //    AddReward(0.001f);
+        //}
+
+        try
         {
-            AddReward(0.001f);
+            if (gridScore.CurrentCell(transform.position) == true)
+            {
+                punishmentMultiplier += 0.001f;
+            }
+
+            else
+            {
+                punishmentMultiplier = 1f;
+            }
+
+            if (gridScore.CheckWalked(transform.position) == false)
+            {
+                AddReward(1f);
+            }
+
+            else
+            {
+                AddReward(-0.001f * punishmentMultiplier);
+            }
+
+            gridScore.MarkWalked(transform.position);
+        }
+
+        catch
+        {
+            // pass
         }
     }
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -51,5 +85,12 @@ public class GeometryBugFinder : Agent
         var continuousActions = actionsOut.ContinuousActions;
         continuousActions[0] = Input.GetAxis("Horizontal");
         continuousActions[1] = Input.GetAxis("Vertical");
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        transform.position = startPos.position;
+
+        gridScore.ResetGrid();
     }
 }

@@ -16,6 +16,8 @@ public class grid_score_detection : MonoBehaviour
 
     public Transform agent;
 
+    public GameObject lastVisitedCell = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class grid_score_detection : MonoBehaviour
 
     void FixedUpdate()
     {
-        MarkWalked(agent.position);
+
     }
 
     void CreateGrid()
@@ -40,12 +42,13 @@ public class grid_score_detection : MonoBehaviour
                 cell.transform.rotation = Quaternion.Euler(90, 0, 0);
                 cell.transform.parent = transform;
                 gridVisuals[x, z] = cell;
-                gridVisuals[x, z].GetComponent<Renderer>().material = nonVisitedMaterial;
             }
         }
+
+        ResetGrid();
     }
 
-    void MarkWalked(Vector3 position)
+    public void MarkWalked(Vector3 position)
     {
         int x = Mathf.FloorToInt((position.x + gridSize / 2f) / cellSize);
         int z = Mathf.FloorToInt((position.z + gridSize / 2f) / cellSize);
@@ -54,6 +57,44 @@ public class grid_score_detection : MonoBehaviour
         {
             visitedCells[x, z] = true;
             gridVisuals[x, z].GetComponent<Renderer>().material = visitedMaterial;
+        }
+    }
+
+    public bool CheckWalked(Vector3 position)
+    {
+        int x = Mathf.FloorToInt((position.x + gridSize / 2f) / cellSize);
+        int z = Mathf.FloorToInt((position.z + gridSize / 2f) / cellSize);
+
+        return visitedCells[x, z];
+    }
+
+    public void ResetGrid()
+    {
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int z = 0; z < gridSize; z++)
+            {
+                visitedCells[x, z] = false;
+                gridVisuals[x, z].GetComponent<Renderer>().material = nonVisitedMaterial;
+            }
+        }
+    }
+
+    public bool CurrentCell(Vector3 position)
+    {
+        int x = Mathf.FloorToInt((position.x + gridSize / 2f) / cellSize);
+        int z = Mathf.FloorToInt((position.z + gridSize / 2f) / cellSize);
+
+        if (lastVisitedCell == gridVisuals[x, z])
+        {
+            lastVisitedCell = gridVisuals[x, z];
+            return true;
+        }
+
+        else
+        {
+            lastVisitedCell = gridVisuals[x, z];
+            return false;
         }
     }
 

@@ -549,6 +549,7 @@ MonoBehaviour:
   nonVisitedMaterial: {fileID: 2100000, guid: 41c6c2904c79f7643acb193e301f77c7, type: 2}
   yOffset: 3
   agent: {fileID: 1501855407}
+  lastVisitedCell: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,8 +800,9 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 500000
+  MaxStep: 50000
   gridScore: {fileID: 901870374}
+  startPos: {fileID: 1510580851}
 --- !u!114 &1501855402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,6 +949,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1510580850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510580851}
+  m_Layer: 0
+  m_Name: StartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510580851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510580850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.68, y: 3.53, z: -21.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751061160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,3 +1097,4 @@ SceneRoots:
   - {fileID: 1751061164}
   - {fileID: 485585075}
   - {fileID: 1501855407}
+  - {fileID: 1510580851}
