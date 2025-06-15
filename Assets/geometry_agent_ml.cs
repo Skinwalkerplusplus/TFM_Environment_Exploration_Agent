@@ -17,11 +17,23 @@ public class GeometryBugFinder : Agent
 
     public Transform startPos;
 
+
     private float punishmentMultiplier = 1f;
+
+    //public override void Initialize()
+    //{
+    //    base.Initialize();
+    //    // Randomize starting behavior
+    //    GetComponent<BehaviorParameters>().BehaviorType =
+    //        Random.Range(0, 2) == 0 ? BehaviorType.Default : BehaviorType.HeuristicOnly;
+    //}
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        GetComponent<Rigidbody>().collisionDetectionMode =
+            CollisionDetectionMode.ContinuousDynamic;
+        Physics.autoSimulation = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -79,6 +91,11 @@ public class GeometryBugFinder : Agent
         {
             // pass
         }
+
+        //if (StepCount > 1000 && GetCumulativeReward() < -500)
+        //{
+        //    EndEpisode();
+        //}
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {

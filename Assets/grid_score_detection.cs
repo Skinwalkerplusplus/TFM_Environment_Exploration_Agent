@@ -10,7 +10,7 @@ public class grid_score_detection : MonoBehaviour
 
     public bool[,] visitedCells;
     private GameObject[,] gridVisuals;
-    private float cellSize = 1f;
+    public float cellSize = 1f;
 
     public float yOffset = 0.01f;
 
