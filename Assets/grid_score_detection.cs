@@ -38,6 +38,7 @@ public class grid_score_detection : MonoBehaviour
             for (int z = 0; z < gridSize; z++)
             {
                 GameObject cell = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                cell.layer = LayerMask.NameToLayer("agent");
                 cell.transform.position = new Vector3(x * cellSize - gridSize / 2f, yOffset, z * cellSize - gridSize / 2f);
                 cell.transform.rotation = Quaternion.Euler(90, 0, 0);
                 cell.transform.parent = transform;

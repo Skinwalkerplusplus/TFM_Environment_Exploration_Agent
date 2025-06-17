@@ -20,6 +20,11 @@ public class GeometryBugFinder : Agent
 
     private float punishmentMultiplier = 1f;
 
+    public float rayLength = 5f;
+    public bool showDebugRays = true;
+
+    public float[] distances = new float[8];
+
     //public override void Initialize()
     //{
     //    base.Initialize();
@@ -33,13 +38,41 @@ public class GeometryBugFinder : Agent
         rb = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().collisionDetectionMode =
             CollisionDetectionMode.ContinuousDynamic;
-        Physics.autoSimulation = true;
+        //Physics.simulationMode = true;
+        Physics.gravity = new Vector3(0, -100f, 0);
+    }
+
+    void Update()
+    {
+        Vector3 origin = transform.position;
+
+        for (int i = 0; i < 8; i++)
+        {
+            float angle = i * 45f;
+            Vector3 direction = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+
+            RaycastHit hit;
+            if (Physics.Raycast(origin, direction, out hit, rayLength))
+            {
+                distances[i] = hit.distance / rayLength; // normalizamos
+            }
+
+            if (showDebugRays)
+            {
+                Color rayColor = hit.collider != null ? Color.red : Color.green;
+                Debug.DrawRay(origin, direction * rayLength, rayColor);
+            }
+        }
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         base.CollectObservations(sensor);
-        sensor.AddObservation(transform.position);
+        //sensor.AddObservation(transform.position);
+        foreach (float distance in distances)
+        {
+            sensor.AddObservation(distance);
+        }
         //sensor.AddObservation(agentTarget.position);
     }
 
