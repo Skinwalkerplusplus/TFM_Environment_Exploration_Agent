@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using System.IO;
+using System.Text;
 
 public class GeometryBugFinder : Agent
 {
@@ -25,6 +27,15 @@ public class GeometryBugFinder : Agent
 
     public float[] distances = new float[8];
 
+    private Dictionary<int, List<Vector3WithLabel>> recordedArrays = new Dictionary<int, List<Vector3WithLabel>>();
+    private List<Vector3> dynamicData = new List<Vector3>();
+    List<Vector3WithLabel> labeledPositions = new List<Vector3WithLabel>();
+
+    private int episodeCount = 0;
+
+    private bool firstPass = false;
+    private bool bugFound = false;
+
     //public override void Initialize()
     //{
     //    base.Initialize();
@@ -32,6 +43,23 @@ public class GeometryBugFinder : Agent
     //    GetComponent<BehaviorParameters>().BehaviorType =
     //        Random.Range(0, 2) == 0 ? BehaviorType.Default : BehaviorType.HeuristicOnly;
     //}
+
+    public struct Vector3WithLabel
+    {
+        public Vector3 Position;
+        public string Label;
+
+        public Vector3WithLabel(Vector3 position, string label)
+        {
+            Position = position;
+            Label = label;
+        }
+
+        public override string ToString()
+        {
+            return $"{Position.x},{Position.y},{Position.z},{Label}";
+        }
+    }
 
     void Start()
     {
@@ -62,6 +90,15 @@ public class GeometryBugFinder : Agent
                 Color rayColor = hit.collider != null ? Color.red : Color.green;
                 Debug.DrawRay(origin, direction * rayLength, rayColor);
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("OutOfBoundsTrigger"))
+        {
+            Debug.Log("Agent touched the goal!");
+            bugFound = true;
         }
     }
 
@@ -139,8 +176,67 @@ public class GeometryBugFinder : Agent
 
     public override void OnEpisodeBegin()
     {
+        if (firstPass)
+        {
+            StopAllCoroutines();
+            recordedArrays.Add(episodeCount, labeledPositions);
+            episodeCount++;
+            labeledPositions = new List<Vector3WithLabel>();
+        }
+
         transform.position = startPos.position;
 
         gridScore.ResetGrid();
+
+        StartCoroutine(LogPositionEverySecond());
+
+        firstPass = true;
+    }
+
+    public IEnumerator LogPositionEverySecond()
+    {
+        string bugStatus = "None";
+
+        while (true)
+        {
+            
+            if (bugFound) { bugStatus = "OutOfBounds"; bugFound = false; }
+            else { bugStatus = "None"; }
+
+            labeledPositions.Add(new Vector3WithLabel(transform.position, bugStatus));
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    public void ExportToCSV(string fileName)
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
+        StringBuilder csvContent = new StringBuilder();
+
+        // Add CSV header (optional)
+        csvContent.AppendLine("Index,Values");
+
+        // Write each dictionary entry
+        foreach (var entry in recordedArrays)
+        {
+            int index = entry.Key;
+            List<Vector3WithLabel> values = entry.Value;
+
+            // Convert list to comma-separated string
+            string valuesString = string.Join(";", values);
+
+            // Append line: "Index,Value1,Value2,..."
+            csvContent.AppendLine($"{index},{valuesString}");
+        }
+
+        // Write to file
+        File.WriteAllText(filePath, csvContent.ToString());
+        Debug.Log($"CSV exported to: {filePath}");
+    }
+
+    private void OnDestroy()
+    {
+        ExportToCSV("agent_pos_results5.csv");
     }
 }
