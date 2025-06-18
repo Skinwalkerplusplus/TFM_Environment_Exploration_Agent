@@ -57,7 +57,7 @@ public class GeometryBugFinder : Agent
 
         public override string ToString()
         {
-            return $"{Position.x},{Position.y},{Position.z},{Label}";
+            return $"{Position.x};{Position.y};{Position.z};{Label}";
         }
     }
 
@@ -214,29 +214,22 @@ public class GeometryBugFinder : Agent
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
         StringBuilder csvContent = new StringBuilder();
 
-        // Add CSV header (optional)
-        csvContent.AppendLine("Index,Values");
-
-        // Write each dictionary entry
         foreach (var entry in recordedArrays)
         {
             int index = entry.Key;
             List<Vector3WithLabel> values = entry.Value;
 
-            // Convert list to comma-separated string
-            string valuesString = string.Join(";", values);
+            string valuesString = string.Join(",", values);
 
-            // Append line: "Index,Value1,Value2,..."
-            csvContent.AppendLine($"{index},{valuesString}");
+            csvContent.AppendLine($"{valuesString}");
         }
 
-        // Write to file
         File.WriteAllText(filePath, csvContent.ToString());
         Debug.Log($"CSV exported to: {filePath}");
     }
 
     private void OnDestroy()
     {
-        ExportToCSV("agent_pos_results5.csv");
+        ExportToCSV("agent_pos_results11.csv");
     }
 }
