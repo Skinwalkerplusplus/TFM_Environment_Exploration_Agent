@@ -35,6 +35,7 @@ public class GeometryBugFinder : Agent
 
     private bool firstPass = false;
     private bool bugFound = false;
+    public bool record;
 
     //public override void Initialize()
     //{
@@ -230,6 +231,9 @@ public class GeometryBugFinder : Agent
 
     private void OnDestroy()
     {
-        ExportToCSV("agent_pos_results11.csv");
+        if (record)
+        {
+            ExportToCSV("agent_pos_results11.csv");
+        }
     }
 }
