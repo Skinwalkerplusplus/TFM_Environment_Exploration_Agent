@@ -2086,6 +2086,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &333614454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,6 +2316,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &346037468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2936,6 +2938,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &436476733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3417,7 +3420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &483263923
 Transform:
   m_ObjectHideFlags: 0
@@ -3768,6 +3771,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &519287324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4302,6 +4306,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &547862602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4951,6 +4956,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &580023996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5465,6 +5471,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &657006648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6003,6 +6010,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &764999008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6567,6 +6575,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &865674027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7345,6 +7354,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &981101199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8039,6 +8049,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1210269974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8483,6 +8494,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1270493982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8923,7 +8935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1341575232
 Transform:
   m_ObjectHideFlags: 0
@@ -9391,6 +9403,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1418990309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9730,6 +9743,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1448123598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10141,6 +10155,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1465259424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10654,7 +10669,8 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  record: 0
+  record: 1
+  fileName: test_predict2.csv
 --- !u!114 &1501855402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10756,7 +10772,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 323d5f53745ecf94cb53e8c9e8869bdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11250,6 +11266,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1580961683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11569,6 +11586,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1598323451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11979,6 +11997,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1660258387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12318,6 +12337,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1687055518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12767,6 +12787,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1736789185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12996,6 +13017,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1737993054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13425,6 +13447,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1747735274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13974,6 +13997,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1837824503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14418,6 +14442,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1894869123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14840,6 +14865,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &1938670203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15389,6 +15415,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &2017074937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15603,6 +15630,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &2019526364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16076,6 +16104,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &2039256399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16411,6 +16440,7 @@ MonoBehaviour:
   - 0
   - 0
   record: 0
+  fileName: 
 --- !u!114 &2110725526
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,6 +37,8 @@ public class GeometryBugFinder : Agent
     private bool bugFound = false;
     public bool record;
 
+    public string fileName;
+
     //public override void Initialize()
     //{
     //    base.Initialize();
@@ -233,7 +235,7 @@ public class GeometryBugFinder : Agent
     {
         if (record)
         {
-            ExportToCSV("agent_pos_results11.csv");
+            ExportToCSV(fileName);
         }
     }
 }
