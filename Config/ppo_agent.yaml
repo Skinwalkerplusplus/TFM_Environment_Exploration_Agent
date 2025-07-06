@@ -1,7 +1,7 @@
 behaviors:
   ppo_behavior:
     trainer_type: ppo
-    max_steps: 50000
+    max_steps: 500000
     time_horizon: 128
     threaded: true
     hyperparameters:
@@ -17,4 +17,3 @@ behaviors:
       extrinsic:
         strength: 1.0
         gamma: 0.99
-        normalize: true

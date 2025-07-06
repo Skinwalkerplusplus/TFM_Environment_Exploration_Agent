@@ -6,6 +6,8 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using System.IO;
 using System.Text;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class GeometryBugFinder : Agent
 {
@@ -39,6 +41,22 @@ public class GeometryBugFinder : Agent
 
     public string fileName;
 
+    public ReplayBehavior replayScript;
+
+    private PlayerInput playerInput;
+
+    private Keyboard keyboard;
+
+    public bool W_Pressed;
+    public bool A_Pressed;
+    public bool S_Pressed;
+    public bool D_Pressed;
+    public bool Space_Pressed;
+
+    private bool[] keyStates = new bool[5];
+
+    private bool timerRun = true;
+
     //public override void Initialize()
     //{
     //    base.Initialize();
@@ -71,6 +89,18 @@ public class GeometryBugFinder : Agent
             CollisionDetectionMode.ContinuousDynamic;
         //Physics.simulationMode = true;
         Physics.gravity = new Vector3(0, -100f, 0);
+        keyboard = Keyboard.current;
+
+        try
+        {
+            string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/played_positions.json");
+            List<Vector3> playedPositionsLoaded = JsonUtility.FromJson<List<Vector3>>(json);
+        }
+
+        catch
+        {
+            //pass   
+        }
     }
 
     void Update()
@@ -102,6 +132,8 @@ public class GeometryBugFinder : Agent
         {
             Debug.Log("Agent touched the goal!");
             bugFound = true;
+            timerRun = false;
+            //AddReward(1000f);
         }
     }
 
@@ -135,34 +167,40 @@ public class GeometryBugFinder : Agent
         //    AddReward(0.001f);
         //}
 
+        //W_Pressed = actions.DiscreteActions[0] == 1;
+        //A_Pressed = actions.DiscreteActions[1] == 1;
+        //S_Pressed = actions.DiscreteActions[2] == 1;
+        //D_Pressed = actions.DiscreteActions[3] == 1;
+        //Space_Pressed = actions.DiscreteActions[4] == 1;
+
         try
         {
-            if (gridScore.CurrentCell(transform.position) == true)
-            {
-                punishmentMultiplier += 0.001f;
-            }
+                if (gridScore.CurrentCell(transform.position) == true)
+                {
+                    punishmentMultiplier += 0.001f;
+                }
 
-            else
-            {
-                punishmentMultiplier = 1f;
-            }
+                else
+                {
+                    punishmentMultiplier = 1f;
+                }
 
-            if (gridScore.CheckWalked(transform.position) == false)
-            {
-                AddReward(1f);
-            }
+                if (gridScore.CheckWalked(transform.position) == false)
+                {
+                    AddReward(1f);
+                }
 
-            else
-            {
-                AddReward(-0.001f * punishmentMultiplier);
-            }
+                else
+                {
+                    AddReward(-0.001f * punishmentMultiplier);
+                }
 
-            gridScore.MarkWalked(transform.position);
+                gridScore.MarkWalked(transform.position);
         }
 
         catch
         {
-            // pass
+            //Debug.Log("critical error!");
         }
 
         //if (StepCount > 1000 && GetCumulativeReward() < -500)
@@ -187,14 +225,42 @@ public class GeometryBugFinder : Agent
             labeledPositions = new List<Vector3WithLabel>();
         }
 
+        timerRun = true;
+
         transform.position = startPos.position;
 
         gridScore.ResetGrid();
 
         StartCoroutine(LogPositionEverySecond());
+        StartCoroutine(RunTimer());
 
         firstPass = true;
     }
+
+    public IEnumerator RunTimer()
+    {
+        bool timePrinted = false;
+        float time = 0;
+
+        while (time < 100000000)
+        {
+            if (timerRun)
+            {
+                time += Time.deltaTime;
+            }
+
+            else if (timePrinted == false)
+            {
+                Debug.Log(time);
+                timePrinted = true;
+            }
+            yield return null;
+        }
+        
+    }
+        
+
+
 
     public IEnumerator LogPositionEverySecond()
     {
